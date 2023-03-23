@@ -14,7 +14,7 @@ public class Endereco {
     @Getter
     @NotNull
     @Column(name = "id_endereco", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter @Setter

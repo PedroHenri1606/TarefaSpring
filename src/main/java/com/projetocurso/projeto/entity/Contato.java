@@ -12,7 +12,7 @@ public class Contato {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @NotNull
     @Column(name = "id_contatos", unique = true)
@@ -33,7 +33,7 @@ public class Contato {
     @Getter @Setter
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "alunos_id")
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
     public Contato() {}

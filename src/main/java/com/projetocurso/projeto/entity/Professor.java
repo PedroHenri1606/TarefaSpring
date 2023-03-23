@@ -15,7 +15,7 @@ import java.util.Set;
 public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @NotNull
     @Column(name = "id_professor")
@@ -26,7 +26,7 @@ public class Professor {
     @Column(name = "nome_professor")
     private String nome;
 
-    @Getter @Setter
+    @Getter
     @ManyToMany(mappedBy = "professores")
     private Set<Aluno> alunos = new HashSet<>();
 

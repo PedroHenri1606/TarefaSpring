@@ -20,7 +20,7 @@ public class Curso {
     @Getter
     @NotNull
     @Column(name = "id_cursos", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Getter @Setter
@@ -34,10 +34,10 @@ public class Curso {
     private String cargaHoraria;
 
 
-    @Getter @Setter
+    @Getter
     @JsonIgnore
     @Column(name = "alunos_cursos")
     @ManyToMany(mappedBy = "cursos")
-    private List<Aluno> alunos;
+    private Set<Aluno> alunos = new HashSet<>();
 
 }
