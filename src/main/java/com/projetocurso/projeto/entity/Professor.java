@@ -6,19 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "professor")
-@NoArgsConstructor
+@Table(name = "professores")
 public class Professor {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     @NotNull
-    @Column(name = "id_professor", unique = true)
+    @Column(name = "id_professor")
     private Long id;
 
     @Getter @Setter
@@ -26,15 +26,8 @@ public class Professor {
     @Column(name = "nome_professor")
     private String nome;
 
-    //@Getter @Setter
-    //@ManyToOne
-    //@JoinColumn(name = "alunos_id")
-    //@Column(name = "alunos_professor")
-    private List<Aluno> alunos = new ArrayList<>();
+    @Getter @Setter
+    @ManyToMany(mappedBy = "professores")
+    private Set<Aluno> alunos = new HashSet<>();
 
-    public Professor(Long id, String nome, List<Aluno> alunos) {
-        this.id = id;
-        this.nome = nome;
-        this.alunos = alunos;
-    }
 }

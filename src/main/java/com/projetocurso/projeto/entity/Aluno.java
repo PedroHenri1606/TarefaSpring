@@ -3,41 +3,51 @@ package com.projetocurso.projeto.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "alunos")
-@NoArgsConstructor
 public class Aluno {
 
     @Id
-    @Getter
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter
     @NotNull
     @Column(name = "id_aluno", unique = true)
     private Long id;
 
-    @NotNull
     @Getter @Setter
+    @NotNull
     @Column(name = "nome_aluno")
     private String nome;
 
-    @NotNull
     @Getter @Setter
-    @Column(name = "cpf_aluno", unique = true)
+    @NotNull
+    @Column(name = "cpf_aluno")
     private String cpf;
 
-    @NotNull
     @Getter @Setter
-    @OneToOne(fetch = FetchType.LAZY)
+    @NotNull
     @JoinColumn(name = "endereco_id")
-    private Endereco Endereco;
+    @OneToOne()
+    private Endereco endereco;
 
-    public Aluno(Long id, String nome, String cpf, com.projetocurso.projeto.entity.Endereco endereco) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        Endereco = endereco;
-    }
+    @OneToMany(mappedBy = "aluno")
+    private List<Contato> contatos;
+
+    @ManyToMany
+    @JoinTable(name = "tb_alunos_cursos",
+    joinColumns = @JoinColumn(name = "aluno_id"),
+    inverseJoinColumns = @JoinColumn(name = "cursos_id"))
+    private List<Curso> cursos;
+
+    @ManyToMany
+    @JoinTable(name = "tb_alunos_professores",
+    joinColumns = @JoinColumn(name = "aluno_id"),
+    inverseJoinColumns = @JoinColumn(name = "professor_id"))
+    private List<Professor> professores;
+
+    public Aluno() {}
 }

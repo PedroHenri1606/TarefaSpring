@@ -1,22 +1,20 @@
 package com.projetocurso.projeto.entity;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "endereco")
-@NoArgsConstructor
+@Table(name = "enderecos")
 public class Endereco {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @NotNull
     @Column(name = "id_endereco", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Getter @Setter
@@ -26,7 +24,7 @@ public class Endereco {
 
     @Getter @Setter
     @NotNull
-    @Column(name = "numero_endereco;")
+    @Column(name = "numero_endereco")
     private String numero;
 
     @Getter @Setter
@@ -35,6 +33,12 @@ public class Endereco {
     private String bairro;
 
     @Getter @Setter
+    @NotNull
     @Column(name = "cep_endereco")
     private String cep;
+
+    @Getter @Setter
+    @NotNull
+    @OneToOne(mappedBy = "endereco")
+    private Aluno aluno;
 }
